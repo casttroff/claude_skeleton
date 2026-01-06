@@ -1,0 +1,40 @@
+{
+  "permissions": {
+    "allow": [
+      "*"
+    ],
+    "deny": [
+      "Bash(rm -rf /*)",
+      "Bash(sudo rm -rf /*)",
+      "Bash(format:*)",
+      "Bash(mkfs:*)",
+      "Bash(DROP DATABASE:*)",
+      "Bash(TRUNCATE TABLE:*)"
+    ]
+  },
+  "enabledMcpjsonServers": ["context7", "playwright", "mercadopago-mcp-server"],
+  "hooks": {
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo '\n✅ Session complete!\n📝 Remember to run: /checkpoint\n📊 Check progress: ls -la checkpoints/\n🔍 Review context: cat .claude/sessions/context_session_*.md'",
+            "timeout": 5
+          }
+        ]
+      }
+    ],
+    "SubagentStop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo '✅ Subagent finished. Review documentation in .claude/doc/'",
+            "timeout": 5
+          }
+        ]
+      }
+    ]
+  }
+}
